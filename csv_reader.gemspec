@@ -9,8 +9,11 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Pedro Pazello"]
   spec.email         = ["pedropazello.rj@gmail.com"]
 
-  spec.summary       = %q{TODO: Write a short summary, because Rubygems requires one.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = %q{
+    Read CSV files and transform it into a array of hashes with
+    { csv_column_name: 'content' } to facilitate manipulations.
+  }
+  spec.homepage      = "https://github.com/pedropazello/csv_reader"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
