@@ -1,5 +1,9 @@
 # CsvReader
 
+[![Code Climate](https://codeclimate.com/github/pedropazello/csv_reader/badges/gpa.svg)](https://codeclimate.com/github/pedropazello/csv_reader)
+
+[![Test Coverage](https://codeclimate.com/github/pedropazello/csv_reader/badges/coverage.svg)](https://codeclimate.com/github/pedropazello/csv_reader/coverage)
+
 Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/csv_reader`. To experiment with that code, run `bin/console` for an interactive prompt.
 
 TODO: Delete this and the text above, and describe your gem
@@ -32,7 +36,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/csv_reader.
+Bug reports and pull requests are welcome on GitHub at https://github.com/pedropazello/csv_reader.
 
 
 ## License
