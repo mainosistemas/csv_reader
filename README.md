@@ -2,30 +2,46 @@
 
 [![Code Climate](https://codeclimate.com/github/pedropazello/csv_reader/badges/gpa.svg)](https://codeclimate.com/github/pedropazello/csv_reader)
 [![Test Coverage](https://codeclimate.com/github/pedropazello/csv_reader/badges/coverage.svg)](https://codeclimate.com/github/pedropazello/csv_reader/coverage)
+[![Build Status](https://travis-ci.org/pedropazello/csv_reader.svg?branch=master)](https://travis-ci.org/pedropazello/csv_reader)
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/csv_reader`. To experiment with that code, run `bin/console` for an interactive prompt.
+Read a CSV file and transform it into a array of hashes, where the key is the name of column in symbol and the value
+is the content of the rows.
 
-TODO: Delete this and the text above, and describe your gem
+Example:
+
+| name | age | email         |
+|------|-----|---------------|
+| John | 23  | john@test.com |
+| Lola | 25  | lola@test.com |
+
+This CSV is transformed into:
+[{name: 'John', age: '23', email: 'john@test.com}, {name: 'Lola', age: '25', email: 'lola@test.com'}]
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'csv_reader'
+gem 'csv_reader', github: 'pedropazello/csv_reader'
 ```
 
 And then execute:
 
     $ bundle
 
-Or install it yourself as:
-
-    $ gem install csv_reader
 
 ## Usage
+```ruby
+csv_file = File.new('/path/to/your/csv/table.csv').read
+=> "name\tage\temail\nJohn\t25\tjohn@test.com\nJimmy\t30\tjimmy@test.com\nLola\t23\tlola@test.com\n"
 
-TODO: Write usage instructions here
+CsvReader::Reader.read(csv_file).array_prepared
+=> [{:name=>"John", :age=>"25", :email=>"john@test.com"},
+ {:name=>"Jimmy", :age=>"30", :email=>"jimmy@test.com"},
+ {:name=>"Lola", :age=>"23", :email=>"lola@test.com"}]
+```
+## IMPORTANT
+It only works with tabs as field delimiters
 
 ## Development
 
