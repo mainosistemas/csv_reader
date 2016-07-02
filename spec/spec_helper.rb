@@ -1,4 +1,4 @@
 require 'codeclimate-test-reporter'
 CodeClimate::TestReporter.start
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
-require 'csv_reader'
+require 'csv_reader/reader'
