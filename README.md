@@ -22,7 +22,7 @@ This CSV is transformed into:
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'csv_reader', github: 'pedropazello/csv_reader'
+gem 'csv_reader', '0.1.0', github: 'pedropazello/csv_reader'
 ```
 
 And then execute:
