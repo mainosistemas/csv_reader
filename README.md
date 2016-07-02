@@ -32,10 +32,10 @@ And then execute:
 
 ## Usage
 ```ruby
-csv_file = File.new('/path/to/your/csv/table.csv').read
+csv_file_content = File.new('/path/to/your/csv/table.csv').read
 => "name\tage\temail\nJohn\t25\tjohn@test.com\nJimmy\t30\tjimmy@test.com\nLola\t23\tlola@test.com\n"
 
-CsvReader::Reader.read(csv_file).array_prepared
+CsvReader::Reader.new(csv_file_content).csv_parsed
 => [{:name=>"John", :age=>"25", :email=>"john@test.com"},
  {:name=>"Jimmy", :age=>"30", :email=>"jimmy@test.com"},
  {:name=>"Lola", :age=>"23", :email=>"lola@test.com"}]
@@ -57,4 +57,3 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/pedrop
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-

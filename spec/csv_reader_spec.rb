@@ -15,7 +15,7 @@ describe CsvReader::Reader do
 
   describe '#array_prepared' do
     it 'Return a array with labels to indicate the rows' do
-      expect(CsvReader::Reader.read(csv_file).array_prepared).to match_array(csv_file_read)
+      expect(CsvReader::Reader.new(csv_file).csv_parsed).to match_array(csv_file_read)
     end
   end
 end
