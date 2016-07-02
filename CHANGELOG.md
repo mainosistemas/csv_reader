@@ -6,3 +6,4 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - `Reader` class.
 - `Reader` tests.
+- Add `Reader` documentation.
