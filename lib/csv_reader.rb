@@ -14,7 +14,7 @@ module CsvReader
     end
 
     def array_prepared
-      warn '[DEPRECATION] `array_prepared` is deprecated.  Please `csv_parsed` instead.'
+      warn '[DEPRECATION] `array_prepared` is deprecated.  Please use `csv_parsed` instead.'
       csv_parsed
     end
 

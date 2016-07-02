@@ -13,7 +13,7 @@ describe CsvReader::Reader do
     ]
   end
 
-  describe '#array_prepared' do
+  describe '#csv_parsed' do
     it 'Return a array with labels to indicate the rows' do
       expect(CsvReader::Reader.new(csv_file).csv_parsed).to match_array(csv_file_read)
     end
