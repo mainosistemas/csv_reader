@@ -3,33 +3,40 @@ require "csv"
 
 module CsvReader
   class Reader
-    attr_writer :csv_array, :header
-    attr_accessor :array_prepared
-
-    def initialize(params)
-      self.csv_array = params[:csv_array]
-      self.header = params[:header]
-      prepare_csv_array
+    def initialize(csv_file_content)
+      @csv_array = parse_csv_file_content(csv_file_content)
+      @header    = get_header
     end
 
-    def self.read(file)
-      csv_array = CSV.parse(file, col_sep: "\t")
-      header = csv_array.first
-      csv_array.delete_at(0)
-      Reader.new(csv_array: csv_array, header: header)
+    def self.read(csv_file_content)
+      warn '[DEPRECATION] `read` is deprecated.  Please use the class Constructor instead.'
+      Reader.new(csv_file_content)
     end
 
-    private
+    def array_prepared
+      warn '[DEPRECATION] `array_prepared` is deprecated.  Please `csv_parsed` instead.'
+      csv_parsed
+    end
 
-    def prepare_csv_array
-      self.array_prepared = []
-      @csv_array.each do |csv_line|
+    def csv_parsed
+      @csv_array.map do |csv_line|
         line = {}
         csv_line.each_with_index do |element, index|
           line[@header[index].to_sym] = element
         end
-        self.array_prepared << line
+        line
       end
+    end
+
+    private
+
+    def parse_csv_file_content(content)
+      CSV.parse(content, col_sep: "\t")
+    end
+
+    def get_header
+      @csv_array.first
+      @csv_array.delete_at(0)
     end
   end
 end
