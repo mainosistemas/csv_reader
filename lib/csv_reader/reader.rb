@@ -38,13 +38,7 @@ module CsvReader
     # is each line from CSV
     #
     def csv_parsed
-      @csv_array.map do |csv_line|
-        line = {}
-        csv_line.each_with_index do |element, index|
-          line[@header[index].to_sym] = element
-        end
-        line
-      end
+      transform_to_hash(@csv_array, @header)
     end
 
     private

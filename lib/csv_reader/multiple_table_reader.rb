@@ -12,19 +12,13 @@ module CsvReader
 
     def csv_parsed
       csv_splitted = split_csv_matrix(@csv_matrix)
-      aaaaa = {}
+      hash = {}
       csv_splitted.each do |key, value|
-        @header = csv_splitted[key].first
+        header = csv_splitted[key].first
         csv_splitted[key].delete_at(0)
-        aaaaa[key] = value.map do |csv_line|
-          line = {}
-          csv_line.each_with_index do |element, index|
-            line[@header[index].to_sym] = element
-          end
-          line
-        end
+        hash[key] = transform_to_hash(value, header)
       end
-      aaaaa
+      hash
     end
 
     private

@@ -13,3 +13,13 @@ def deep_compact(csv_array)
     i.compact if i.compact.any?
   end.compact
 end
+
+def transform_to_hash(csv_matrix, header)
+  csv_matrix.map do |csv_line|
+    line = {}
+    csv_line.each_with_index do |element, index|
+      line[header[index].to_sym] = element
+    end
+    line
+  end
+end
