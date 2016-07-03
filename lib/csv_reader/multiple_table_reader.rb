@@ -1,21 +1,19 @@
 require 'csv_reader/version'
 require 'csv_reader/utils'
 require 'csv'
-require 'pry'
 
 module CsvReader
   class MultipleTableReader
     def initialize(csv_content, table_names)
-      @csv_matrix   = parse_csv_file_content(csv_content)
       @table_names  = table_names
+      @csv_matrix   = split_csv_matrix(parse_csv_file_content(csv_content))
     end
 
     def csv_parsed
-      csv_splitted = split_csv_matrix(@csv_matrix)
       hash = {}
-      csv_splitted.each do |key, value|
-        header = csv_splitted[key].first
-        csv_splitted[key].delete_at(0)
+      @csv_matrix.each do |key, value|
+        header = @csv_matrix[key].first
+        @csv_matrix[key].delete_at(0)
         hash[key] = transform_to_hash(value, header)
       end
       hash
