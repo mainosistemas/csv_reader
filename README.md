@@ -14,19 +14,22 @@ Example:
 | Lola | 25  | lola@test.com |
 
 This CSV is transformed into:
+```ruby
 [{name: 'John', age: '23', email: 'john@test.com}, {name: 'Lola', age: '25', email: 'lola@test.com'}]
+```
 
 Or, if your CSV have more than one table inside:
 
 ![Alt text](/spec/fixtures/files/multiple_table.png?raw=true "Table")
 
 This CSV is transformed into:
+```ruby
 {:People =>
   [{:name=>"John", :age=>"25", :email=>"john@test.com"},
    {:name=>"Jimmy", :age=>"30", :email=>"jimmy@test.com"},
    {:name=>"Lola", :age=>"23", :email=>"lola@test.com"}],
  :Music =>[{:name=>"Travel Is Dangerous", :band=>"Mogwai"}, {:name=>"Frozen Twilight", :band=>"God is An Astronaut"}]}
-
+```
 
 ## Installation
 
