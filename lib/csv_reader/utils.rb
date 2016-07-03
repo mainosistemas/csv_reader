@@ -5,5 +5,11 @@
 # Use CSV.parse() to parse the CSV content using tabs as field delimiters
 #
 def parse_csv_file_content(content)
-  CSV.parse(content, col_sep: "\t")
+  deep_compact(CSV.parse(content, col_sep: "\t"))
+end
+
+def deep_compact(csv_array)
+  csv_array.map do |i|
+    i.compact if i.compact.any?
+  end.compact
 end

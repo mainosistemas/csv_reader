@@ -1,22 +1,21 @@
 require 'csv_reader/version'
 require 'csv_reader/utils'
 require 'csv'
+require 'pry'
 
 module CsvReader
   class MultipleTableReader
     def initialize(csv_content, table_names)
-      @csv_array   = parse_csv_file_content(csv_content)
-      @table_names = table_names
-      @csv_array = deep_compact(@csv_array)
-      @foo = {}
-      split_csv_array(@csv_array)
+      @csv_matrix   = parse_csv_file_content(csv_content)
+      @table_names  = table_names
     end
 
     def csv_parsed
+      csv_splitted = split_csv_matrix(@csv_matrix)
       aaaaa = {}
-      @foo.map do |key, value|
-        @header = @foo[key].first
-        @foo[key].delete_at(0)
+      csv_splitted.each do |key, value|
+        @header = csv_splitted[key].first
+        csv_splitted[key].delete_at(0)
         aaaaa[key] = value.map do |csv_line|
           line = {}
           csv_line.each_with_index do |element, index|
@@ -30,29 +29,22 @@ module CsvReader
 
     private
 
-    def split_csv_array(list, table = nil)
+    def split_csv_matrix(list, table = nil, list_splitted = {})
       head = list.first
       tail = list - [head]
-      head = head.compact.first
-      table_name = nil || table
-      if is_a_table_name?(head)
-        table_name = head
-        @foo[head.to_sym] = []
+      head_compacted = head.compact.first
+      if is_a_table_name?(head_compacted)
+        table = head_compacted
+        list_splitted[head_compacted.to_sym] = []
       elsif table
-        @foo[table.to_sym] << list.first
+        list_splitted[table.to_sym] << list.first
       end
-      return if tail.nil? || tail.empty?
-      return split_csv_array(tail, table_name)
+      return list_splitted if tail.nil? || tail.empty?
+      return split_csv_matrix(tail, table, list_splitted)
     end
 
     def is_a_table_name?(line)
       @table_names.include?(line)
-    end
-
-    def deep_compact(csv_array)
-      csv_array.map do |i|
-        i.compact if i.compact.any?
-      end.compact
     end
   end
 end
