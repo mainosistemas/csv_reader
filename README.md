@@ -46,6 +46,7 @@ And then execute:
 Converts a simple CSV to hash
 
 ```ruby
+require 'csv_reader/reader'
 csv_file_content = File.new('/path/to/your/csv/table.csv').read
 => "name\tage\temail\nJohn\t25\tjohn@test.com\nJimmy\t30\tjimmy@test.com\nLola\t23\tlola@test.com\n"
 
@@ -58,6 +59,7 @@ CsvReader::Reader.new(csv_file_content).csv_parsed
 Converts a CSV with more then one table to hash, where each key represents a table
 
 ```ruby
+require 'csv_reader/multiple_table_reader'
 csv_file_content = File.new('/path/to/your/csv/table.csv').read
 => "People\t\t\nname\tage\temail\nJohn\t25\tjohn@test.com\nJimmy\t30\tjimmy@test.com\nLola\t23\tlola@test.com\n\t\t\nMusic\t\t\nname\tband\t\nTravel Is Dangerous\tMogwai\t\nFrozen Twilight\tGod is An Astronaut\t\n"
 
