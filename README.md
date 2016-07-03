@@ -4,8 +4,7 @@
 [![Test Coverage](https://codeclimate.com/github/pedropazello/csv_reader/badges/coverage.svg)](https://codeclimate.com/github/pedropazello/csv_reader/coverage)
 [![Build Status](https://travis-ci.org/pedropazello/csv_reader.svg?branch=master)](https://travis-ci.org/pedropazello/csv_reader)
 
-Read a CSV file and transform it into a array of hashes, where the key is the name of column in symbol and the value
-is the content of the rows.
+Parse CSV to hash structure.
 
 Example:
 
@@ -17,12 +16,24 @@ Example:
 This CSV is transformed into:
 [{name: 'John', age: '23', email: 'john@test.com}, {name: 'Lola', age: '25', email: 'lola@test.com'}]
 
+Or, if your CSV have more than one table inside:
+
+![Alt text](/spec/fixtures/files/multiple_table.png?raw=true "Table")
+
+This CSV is transformed into:
+{:People =>
+  [{:name=>"John", :age=>"25", :email=>"john@test.com"},
+   {:name=>"Jimmy", :age=>"30", :email=>"jimmy@test.com"},
+   {:name=>"Lola", :age=>"23", :email=>"lola@test.com"}],
+ :Music =>[{:name=>"Travel Is Dangerous", :band=>"Mogwai"}, {:name=>"Frozen Twilight", :band=>"God is An Astronaut"}]}
+
+
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'csv_reader', '0.1.0', github: 'pedropazello/csv_reader'
+gem 'csv_reader', '0.2.0-beta', github: 'pedropazello/csv_reader'
 ```
 
 And then execute:
@@ -31,6 +42,9 @@ And then execute:
 
 
 ## Usage
+#### `Reader` class
+Converts a simple CSV to hash
+
 ```ruby
 csv_file_content = File.new('/path/to/your/csv/table.csv').read
 => "name\tage\temail\nJohn\t25\tjohn@test.com\nJimmy\t30\tjimmy@test.com\nLola\t23\tlola@test.com\n"
@@ -40,6 +54,23 @@ CsvReader::Reader.new(csv_file_content).csv_parsed
  {:name=>"Jimmy", :age=>"30", :email=>"jimmy@test.com"},
  {:name=>"Lola", :age=>"23", :email=>"lola@test.com"}]
 ```
+### `MultipleTableReader` class
+Converts a CSV with more then one table to hash, where each key represents a table
+
+```ruby
+csv_file_content = File.new('/path/to/your/csv/table.csv').read
+=> "People\t\t\nname\tage\temail\nJohn\t25\tjohn@test.com\nJimmy\t30\tjimmy@test.com\nLola\t23\tlola@test.com\n\t\t\nMusic\t\t\nname\tband\t\nTravel Is Dangerous\tMogwai\t\nFrozen Twilight\tGod is An Astronaut\t\n"
+
+CsvReader::MultipleTableReader.new(csv_file_content, ['People', 'Music']).csv_parsed
+=> {:People=>
+  [{:name=>"John", :age=>"25", :email=>"john@test.com"},
+   {:name=>"Jimmy", :age=>"30", :email=>"jimmy@test.com"},
+   {:name=>"Lola", :age=>"23", :email=>"lola@test.com"}],
+ :Music=>[{:name=>"Travel Is Dangerous", :band=>"Mogwai"}, {:name=>"Frozen Twilight", :band=>"God is An Astronaut"}]}
+
+```
+
+
 ## IMPORTANT
 It only works with tabs as field delimiters
 

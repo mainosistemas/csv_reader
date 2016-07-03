@@ -4,11 +4,24 @@ require 'csv'
 
 module CsvReader
   class MultipleTableReader
+    # == Parameters:
+    # csv_content::
+    #   A content from CSV will be parsed
+    # table_names::
+    #   Name of table names inside csv_content
+    #
+    # MultipleTableReader constructor. Converts a CSV content into a Matrix
+    # representating this CSV and split each table found inside
+    #
     def initialize(csv_content, table_names)
       @table_names  = table_names
       @csv_matrix   = split_csv_matrix(parse_csv_file_content(csv_content))
     end
 
+    # Iterate through a `@csv_matrix` attribute and convert it to
+    # a hash where each key contains a table found inside CSV content
+    # passed to constructor's class
+    #
     def csv_parsed
       hash = {}
       @csv_matrix.each do |key, value|
