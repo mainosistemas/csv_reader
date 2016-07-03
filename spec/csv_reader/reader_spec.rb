@@ -2,10 +2,10 @@ require 'spec_helper'
 
 describe CsvReader::Reader do
   let(:csv_file) do
-    File.new(File.open('spec/fixtures/files/table.csv')).read
+    read_file_from_fixtures('table.csv')
   end
 
-  let(:csv_file_read) do
+  let(:result) do
     [
       { name: 'John',  age: '25', email: 'john@test.com'  },
       { name: 'Jimmy', age: '30', email: 'jimmy@test.com' },
@@ -15,7 +15,7 @@ describe CsvReader::Reader do
 
   describe '#csv_parsed' do
     it 'Return a array with labels to indicate the rows' do
-      expect(CsvReader::Reader.new(csv_file).csv_parsed).to match_array(csv_file_read)
+      expect(CsvReader::Reader.new(csv_file).csv_parsed).to match_array(result)
     end
   end
 end

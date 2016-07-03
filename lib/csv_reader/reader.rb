@@ -1,4 +1,5 @@
 require 'csv_reader/version'
+require 'csv_reader/utils'
 require 'csv'
 
 module CsvReader
@@ -47,17 +48,6 @@ module CsvReader
     end
 
     private
-
-    # == Parameters:
-    # content::
-    #   A content from CSV will be parsed
-    #
-    # Use CSV.parse() to parse the CSV content using tabs as field delimiters
-    #
-    def parse_csv_file_content(content)
-      CSV.parse(content, col_sep: "\t")
-    end
-
     # Get the first line of CSV and remove from {@csv_array}
     # == Returns:
     # A hash with Headers of each column from CSV
