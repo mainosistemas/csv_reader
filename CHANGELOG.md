@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - Move `Reader` class definition from `csv_reader.rb` to `csv_reader/reader.rb`
 - Move `Reader` class tests from `csv_reader_spec.rb` to `csv_reader/reader_spec.rb`
+
 ### Added
 - `MultipleTableReader` class and some tests
 
