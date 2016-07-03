@@ -21,18 +21,18 @@ module CsvReader
 
     private
 
-    def split_csv_matrix(list, table = nil, list_splitted = {})
+    def split_csv_matrix(list, table_name = nil, list_splitted = {})
       head = list.first
       tail = list - [head]
       head_compacted = head.compact.first
       if is_a_table_name?(head_compacted)
-        table = head_compacted
+        table_name = head_compacted
         list_splitted[head_compacted.to_sym] = []
-      elsif table
-        list_splitted[table.to_sym] << list.first
+      elsif table_name
+        list_splitted[table_name.to_sym] << list.first
       end
       return list_splitted if tail.nil? || tail.empty?
-      return split_csv_matrix(tail, table, list_splitted)
+      return split_csv_matrix(tail, table_name, list_splitted)
     end
 
     def is_a_table_name?(line)
